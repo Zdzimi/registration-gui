@@ -1,0 +1,39 @@
+<div [hidden]="!loginView">
+  <form class="box">
+    <h1>Zaloguj</h1>
+    <h4 *ngIf="errorLogin">{{ errorLogin }}</h4>
+    <label for="cUsername">Nazwa użytkownika:</label>
+    <input type="text" [(ngModel)]="username" name="username" id="cUsername">
+
+    <label for="cPassword">Hasło:</label>
+    <input type="password" [(ngModel)]="password" name="password" id="cPassword">
+
+    <button class="bOk" (click)="login()">Zaloguj</button>
+    <button class="bLink" (click)="showRegistry()">Utwórz konto</button>
+  </form>
+</div>
+
+<div [hidden]="loginView">
+  <form class="box">
+    <h1>Nowe konto</h1>
+    <h4 *ngIf="errorRegistry">{{ errorRegistry }}</h4>
+
+    <label for="username">Nazwa użytkownika:</label>
+    <input type="text" [(ngModel)]="user.username" name="username" id="username">
+
+    <label for="name">Imię:</label>
+    <input type="text" [(ngModel)]="user.name" name="name" id="name">
+
+    <label for="surname">Nazwisko:</label>
+    <input type="text" [(ngModel)]="user.surname" name="surname" id="surname">
+
+    <label for="email">e-mail:</label>
+    <input type="text" [(ngModel)]="user.email" name="email" id="email">
+
+    <label for="password">Hasło:</label>
+    <input type="password" [(ngModel)]="user.password" name="password" id="password">
+
+    <button class="bOk" (click)="registry()">Utwórz konto</button>
+    <button class="bLink" (click)="showLogin()">Zaloguj</button>
+  </form>
+</div>

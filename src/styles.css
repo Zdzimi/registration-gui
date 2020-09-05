@@ -1,1 +1,86 @@
 /* You can add global styles to this file, and also import other style files */
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: cadetblue;
+}
+
+#container{
+  margin: auto;
+  text-align: center;
+}
+
+#left{
+  float: left;
+  width: 50%;
+}
+
+.divClass{
+  margin: 50px;
+}
+
+#rigth{
+  float: left;
+  width: 50%;
+}
+
+.element{
+  width: 400px;
+  margin: 20px auto;
+  padding: 40px 60px;
+  background-color: darkcyan;
+  text-align: center;
+  border-radius: 24px;
+}
+
+a {
+  letter-spacing: 2px;
+  color: blueviolet;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: black;
+}
+
+button{
+  background: none;
+  display: block;
+  margin: 10px auto;
+  border: 2px solid blueviolet;
+  padding: 10px 20px;
+  outline: none;
+  border-radius: 24px;
+  cursor: pointer;
+}
+
+button:hover{
+  background: blueviolet;
+}
+
+.box h1{
+  color: blueviolet;
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.box h4{
+  color: red;
+}
+
+.box input{
+  background: none;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  border: 2px solid blueviolet;
+  padding: 4px 2px;
+  width: 200px;
+  outline: none;
+  border-radius: 24px;
+}

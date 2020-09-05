@@ -1,0 +1,99 @@
+<div id="container">
+  <ng-container *ngIf="error; then showError; else res"></ng-container>
+
+  <ng-template #showError>
+    <h4>{{ error }}</h4>
+  </ng-template>
+
+  <ng-template #res>
+    <div *ngFor="let user of users">
+
+      <div class="divClass">
+        <h2>Panel główny {{ user.name }}</h2>
+      </div>
+
+      <div id="left">
+
+        <div class="divClass">
+          <button *ngIf="!detailsVisible" (click)="displayDetails()">Zmień swoje dane</button>
+
+          <form class="box" *ngIf="detailsVisible">
+            <h1>Zmiana danych</h1>
+            <h4 *ngIf="error">{{ error }}</h4>
+
+            <label for="username">Nazwa Użytkownika:</label>
+            <input type="text" [(ngModel)]="userNew.username" name="username" id="username">
+
+            <label for="name">Imię:</label>
+            <input type="text" [(ngModel)]="userNew.name" name="name" id="name">
+
+            <label for="surname">Nazwisko:</label>
+            <input type="text" [(ngModel)]="userNew.surname" name="surname" id="surname">
+
+            <label for="email">e-mail:</label>
+            <input type="text" [(ngModel)]="userNew.email" name="email" id="email">
+
+            <label for="password">Hasło:</label>
+            <input type="password" [(ngModel)]="userNew.password" name="password" id="password">
+
+            <label for="password2">Stare hasło:</label>
+            <input type="password" [(ngModel)]="userOld.password" name="password2" id="password2">
+
+            <button (click)="updateUser()">Aktualizuj</button>
+
+            <button (click)="cancel()">Anuluj</button>
+          </form>
+        </div>
+
+        <div class="divClass">
+          <button *ngIf="!creatingNewIntitutionVisible" (click)="displayCreatingInstitution()">Utwórz nową instytucję</button>
+
+          <form class="box" *ngIf="creatingNewIntitutionVisible">
+            <h1>Utwórz nową instytucję</h1>
+            <h4 *ngIf="error">{{ errorIns }}</h4>
+
+            <label for="institutionName">Nazwa Instytucji:</label>
+            <input type="text" [(ngModel)]="institutionNew.institutionName" name="institutionName" id="institutionName">
+
+            <label for="province">Województwo:</label>
+            <input type="text" [(ngModel)]="institutionNew.province" name="province" id="province">
+
+            <label for="city">Miasto:</label>
+            <input type="text" [(ngModel)]="institutionNew.city" name="city" id="city">
+
+            <label for="street">Ulica:</label>
+            <input type="text" [(ngModel)]="institutionNew.street" name="street" id="street">
+
+            <label for="gateNumber">Numer budynku:</label>
+            <input type="text" [(ngModel)]="institutionNew.gateNumber" name="gateNumber" id="gateNumber">
+
+            <label for="premisesNumber">Numer lokalu:</label>
+            <input type="text" [(ngModel)]="institutionNew.premisesNumber" name="premisesNumber" id="premisesNumber">
+
+            <label for="typeOfService">Rodzaj usług:</label>
+            <input type="text" [(ngModel)]="institutionNew.typeOfService" name="typeOfService" id="typeOfService">
+
+            <label for="description">Opis:</label>
+            <input type="text" [(ngModel)]="institutionNew.description" name="description" id="description">
+
+            <button (click)="create()">Utwórz</button>
+
+            <button (click)="cancelCreating()">Anuluj</button>
+          </form>
+        </div>
+
+      </div>
+
+      <div id="rigth">
+        <div class="element" *ngFor="let link of user.links">
+          <p>{{ showText(link.rel) }}</p>
+          <a [title]="modifyLink(link.href)" [routerLink]="modifyLink(link.href)">
+            {{ link.rel }}
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </ng-template>
+
+</div>

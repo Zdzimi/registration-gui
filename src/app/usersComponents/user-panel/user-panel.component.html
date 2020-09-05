@@ -1,0 +1,30 @@
+<div id="container">
+  <ng-container *ngIf="error; then showError; else res"></ng-container>
+
+  <ng-template #showError>
+    <h4>{{ error }}</h4>
+  </ng-template>
+
+  <ng-template #res>
+    <div *ngFor="let user of userSingleton">
+
+      <div id="left">
+
+        <div class="divClass">
+          <h3>{{ user.name }} {{ user.surname }}</h3>
+          <h3>{{ user.email }}</h3>
+        </div>
+
+      </div>
+
+      <div id="rigth">
+        <div class="element" *ngFor="let link of user.links">
+          <a [routerLink]="modifyLink(link.href)">{{ link.rel }}</a>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-template>
+
+</div>

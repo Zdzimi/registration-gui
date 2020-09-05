@@ -1,0 +1,110 @@
+<div id="container">
+
+  <ng-container *ngIf="error; then showError; else answer"></ng-container>
+
+  <ng-template #showError>
+    {{ error }}
+  </ng-template>
+
+  <ng-template #answer>
+    <div id="callendar" *ngFor="let template of templateSingleton">
+
+      <form class="callendarBox">
+
+        <h1>{{ template.yearAndMonth.month | num }} - {{ template.yearAndMonth.year }}</h1>
+
+        <div class="day">
+          <h2>pn</h2>
+        </div>
+        <div class="day">
+          <h2>wt</h2>
+        </div>
+        <div class="day">
+          <h2>śr</h2>
+        </div>
+        <div class="day">
+          <h2>czw</h2>
+        </div>
+        <div class="day">
+          <h2>pt</h2>
+        </div>
+        <div class="day">
+          <h2>sob</h2>
+        </div>
+        <div class="day">
+          <h2>nd</h2>
+        </div>
+        <div class="day" *ngFor="let el of emptyDays"></div>
+
+        <div class="day" *ngFor="let day of templateNew.days">
+
+          <h2>{{ day.dayNumber }}</h2>
+
+          <label for="timeStart{{ day.dayNumber }}">Początek:</label>
+          <input [(ngModel)]="day.timeStart" type="time" id="timeStart{{ day.dayNumber }}" name="timeStart">
+
+          <label for="timeEnd{{ day.dayNumber }}">Koniec:</label>
+          <input [(ngModel)]="day.timeEnd" type="time" id="timeEnd{{ day.dayNumber }}" name="timeEnd">
+
+          <label for="placeName{{ day.dayNumber }}">Stanowisko:</label>
+          <input [(ngModel)]="day.placeName" type="text" id="placeName{{ day.dayNumber }}" name="placeName">
+
+        </div>
+
+        <div id="visitTime">
+          <label for="visitTime">Czas Wizyty:</label>
+          <input [(ngModel)]="templateNew.visitTime" type="number" id="visitTime" name="visitTime">
+        </div>
+
+        <button (click)="sendTemplate()">Zapisz</button>
+      </form>
+
+      <div>
+        <h4 *ngFor="let link of template.links">
+          <a *ngIf="!link.rel.endsWith('szablon')" [routerLink]="modifyLink(link.href)">{{ link.rel }}</a>
+        </h4>
+      </div>
+
+    </div>
+  </ng-template>
+
+  <ng-container *ngIf="timetableAndErrors">
+    <div>
+
+      <h2>{{ timetableAndErrors.month | num }}.{{ timetableAndErrors.year }}</h2>
+      <div class="day">
+        <h2>pn</h2>
+      </div>
+      <div class="day">
+        <h2>wt</h2>
+      </div>
+      <div class="day">
+        <h2>śr</h2>
+      </div>
+      <div class="day">
+        <h2>czw</h2>
+      </div>
+      <div class="day">
+        <h2>pt</h2>
+      </div>
+      <div class="day">
+        <h2>sob</h2>
+      </div>
+      <div class="day">
+        <h2>nd</h2>
+      </div>
+      <div class="day" *ngFor="let el of emptyDays"></div>
+      <div class="day" *ngFor="let dayTimetableAndErrors of timetableAndErrors.dayTimetableAndErrors">
+        <h2>{{ dayTimetableAndErrors.dayOfMonth }}</h2>
+        <div class="v" *ngFor="let visit of dayTimetableAndErrors.visits">
+          <h4>{{ visit.visitTimeStart }}</h4>
+        </div>
+        <div class="e" *ngFor="let er of dayTimetableAndErrors.errors">
+          <h4>{{ er }}</h4>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+</div>

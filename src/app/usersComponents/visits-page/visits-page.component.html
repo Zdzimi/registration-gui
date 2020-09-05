@@ -1,0 +1,25 @@
+<div id="container">
+
+  <ng-container *ngIf="error; then showError; else answer"></ng-container>
+
+  <ng-template #showError>
+    {{ error }}
+  </ng-template>
+
+  <ng-template #answer>
+
+    <div class="element" *ngFor="let visit of visitsList">
+      <h4>{{ visit.dayTimetable.monthTimetable.institution.institutionName }}</h4>
+      <h4 *ngFor="let link of visit.links">
+        <a [title]="link.rel" [routerLink]="modifyLink(link.href)">
+          {{ link.rel }}
+        </a>
+      </h4>
+    </div>
+
+    <div class="element" *ngIf="visitsList.length === 0">
+      <h2>Brak wyników</h2>
+    </div>
+  </ng-template>
+
+</div>

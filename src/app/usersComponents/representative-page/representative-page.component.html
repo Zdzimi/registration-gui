@@ -1,0 +1,26 @@
+<div id="container">
+
+  <ng-container *ngIf="error; then showError; else answer"></ng-container>
+
+  <ng-template #showError>
+    {{ error }}
+  </ng-template>
+
+  <ng-template #answer>
+    <div class="element" *ngFor="let representative of representativeSing">
+
+      <div class="divClass">
+        <h4>{{ representative.username }} {{ representative.surname }}</h4>
+        <h4>{{ representative.email }}</h4>
+      </div>
+
+      <div class="divClass">
+        <h4 *ngFor="let link of representative.links">
+          <a [routerLink]="modifyLink(link.href)">{{ link.rel }}</a>
+        </h4>
+      </div>
+
+    </div>
+  </ng-template>
+
+</div>

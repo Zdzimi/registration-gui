@@ -1,0 +1,38 @@
+<div id="container">
+  <ng-container *ngIf="error; then showError; else res"></ng-container>
+
+  <ng-template #showError>
+    <h4>{{ error }}</h4>
+  </ng-template>
+
+  <ng-template #res>
+    <div >
+
+      <div id="left">
+        <div class="divClass">
+          <button *ngIf="!addPanelVisible" (click)="showAddingPanel()">Dodaj stanowisko</button>
+
+          <form class="box" *ngIf="addPanelVisible">
+            <h1>Dodaj stanowisko</h1>
+
+            <label for="placeName">Nazwa stanowiska:</label>
+            <input type="text" [(ngModel)]="place.placeName" name="placeName" id="placeName">
+
+            <button (click)="addPlace()">Dodaj</button>
+
+            <button (click)="cancel()">Anuluj</button>
+          </form>
+        </div>
+
+      </div>
+
+      <div id="rigth">
+        <div class="element" *ngFor="let place of placeList">
+          <a [routerLink]="modifyLink(place.links[0].href)">{{ place.links[0].rel }}</a>
+        </div>
+      </div>
+
+    </div>
+  </ng-template>
+
+</div>

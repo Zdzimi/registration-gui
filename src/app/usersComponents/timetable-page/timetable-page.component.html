@@ -1,0 +1,49 @@
+<div id="container">
+  <ng-container *ngIf="error; then showError; else res"></ng-container>
+
+  <ng-template #showError>
+    <h4>{{ error }}</h4>
+  </ng-template>
+
+  <ng-template #res>
+    <div *ngFor="let timetable of timetableSingle">
+
+      <div id="left">
+
+        <div class="divClass">
+          <h4>{{ timetable.representative.name }} {{ timetable.representative.surname }}</h4>
+          <h4>{{ timetable.representative.email }}</h4>
+        </div>
+
+        <div class="divClass">
+          <h4>{{ timetable.institution.institutionName }}</h4>
+          <h4>{{ timetable.institution.city }}</h4>
+          <h4>{{ timetable.institution.street }} {{ timetable.institution.gateNumber }}
+            <span *ngIf="timetable.institution.premisesNumber">/ {{ timetable.institution.premisesNumber }}</span>
+          </h4>
+        </div>
+
+      </div>
+
+      <div id="rigth">
+        <h1>{{ timetable.month | num }} - {{ timetable.year }}</h1>
+        <div class="day">pn</div>
+        <div class="day">wt</div>
+        <div class="day">śr</div>
+        <div class="day">czw</div>
+        <div class="day">pt</div>
+        <div class="day">sob</div>
+        <div class="day">nd</div>
+        <div class="day" *ngFor="let empty of emptyDays"></div>
+        <ng-container *ngFor="let link of timetable.links">
+          <div [ngClass]="setClass(link)">
+            <a [title]="link.rel" [routerLink]="modifyLink(link.href)">{{ link.rel }}</a>
+          </div>
+        </ng-container>
+      </div>
+
+    </div>
+
+  </ng-template>
+
+</div>

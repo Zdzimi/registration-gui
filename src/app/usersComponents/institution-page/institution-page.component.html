@@ -1,0 +1,67 @@
+<div id="container">
+  <ng-container *ngIf="error; then showError; else res"></ng-container>
+
+  <ng-template #showError>
+    <h4>{{ error }}</h4>
+  </ng-template>
+
+  <ng-template #res>
+    <div *ngFor="let institution of institutionSingl">
+
+      <div id="left">
+
+        <div class="divClass">
+          <h2>{{ institution.institutionName }}</h2>
+        </div>
+
+        <div class="divClass">
+          <h4>{{ institution.typeOfService }}</h4>
+        </div>
+
+        <div class="divClass">
+          <h4>{{ institution.description }}</h4>
+        </div>
+
+        <div class="divClass">
+          <h4>Województwo: {{ institution.province }}</h4>
+          <h4>Miasto: {{ institution.city }}</h4>
+          <h4>
+            <span class="adres">Ulica: {{ institution.street }}</span>
+            <span class="adres"> {{ institution.gateNumber }}</span>
+            <span class="adres" *ngIf="institution.premisesNumber">/ {{ institution.premisesNumber }}</span>
+          </h4>
+        </div>
+
+      </div>
+
+      <div id="rigth">
+
+        <div class="element" *ngFor="let link of institution.links">
+          <a [routerLink]="modifyLink(link.href)">
+            {{ link.rel }}
+          </a>
+        </div>
+
+        <div class="element" *ngIf="isItRepresentativesPanel">
+          <button *ngIf="!addingRepresentativePanelVisible" (click)="showAddingPanel()">dodaj pracownika</button>
+          <form class="box" *ngIf="addingRepresentativePanelVisible">
+            <h3>Dodaj pracownika</h3>
+            <h4 *ngIf="errorAdding">{{ errorAdding }}</h4>
+
+            <label for="username">Nazwa Użytkownika:</label>
+            <input type="text" [(ngModel)]="addingRepresentativeUsername" name="username" id="username">
+
+            <button (click)="addRepresentative()">Dodaj</button>
+
+            <button (click)="cancel()">Anuluj</button>
+          </form>
+          <h4>{{ addingSuccessMessage }}</h4>
+        </div>
+
+      </div>
+
+    </div>
+
+  </ng-template>
+
+</div>

@@ -1,0 +1,73 @@
+<div id="container">
+  <ng-container *ngIf="error; then showError; else res"></ng-container>
+
+  <ng-template #showError>
+    <h4>{{ error }}</h4>
+  </ng-template>
+
+  <ng-template #res>
+    <div *ngFor="let visit of visitSing">
+
+      <div id="left">
+
+        <div class="divClass">
+          <h2>Szczegóły wizyty:</h2>
+        </div>
+
+        <div class="divClass">
+          <h4>
+            {{ visit.dayTimetable.dayOfMonth | num }}
+            .{{ visit.dayTimetable.monthTimetable.month | num }}
+            .{{ visit.dayTimetable.monthTimetable.year }}
+            - {{ visit.visitTimeStart }}
+          </h4>
+        </div>
+
+        <div class="divClass">
+          <h3>{{ visit.dayTimetable.monthTimetable.institution.institutionName }}</h3>
+          <h4>{{ visit.dayTimetable.monthTimetable.institution.city }}</h4>
+          <h4>
+            <span>{{ visit.dayTimetable.monthTimetable.institution.street }}</span>
+            <span> {{ visit.dayTimetable.monthTimetable.institution.gateNumber }}</span>
+            <span *ngIf="visit.dayTimetable.monthTimetable.institution.premisesNumber">
+              /{{ visit.dayTimetable.monthTimetable.institution.premisesNumber }}
+            </span>
+          </h4>
+          <h4>{{ visit.place.placeName }}</h4>
+        </div>
+
+        <div class="divClass">
+          <h3>Pracownik:</h3>
+          <h4>
+            {{ visit.dayTimetable.monthTimetable.representative.name }}
+            {{ visit.dayTimetable.monthTimetable.representative.surname }}
+          </h4>
+          <h4>
+            {{ visit.dayTimetable.monthTimetable.representative.email }}
+          </h4>
+        </div>
+
+        <div class="divClass" *ngIf="visitBooked">
+          <h3>Klient:</h3>
+          <h4>
+            {{ visit.user.name }}
+            {{ visit.user.surname }}
+          </h4>
+          <h4>
+            {{ visit.user.email }}
+          </h4>
+        </div>
+
+      </div>
+
+      <div id="rigth">
+        <div class="element" *ngFor="let link of visit.links">
+          <button (click)="click(link)">{{ link.rel }}</button>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-template>
+
+</div>

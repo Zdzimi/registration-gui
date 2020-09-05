@@ -1,0 +1,29 @@
+<div id="container">
+  <ng-container *ngIf="error; then showError; else res"></ng-container>
+
+  <ng-template #showError>
+    <h4>{{ error }}</h4>
+  </ng-template>
+
+  <ng-template #res>
+    <div *ngFor="let place of placeSingleton">
+
+      <div id="left">
+
+        <div class="divClass">
+          <h3>Stanowisko: {{ place.placeName }}</h3>
+        </div>
+
+      </div>
+
+      <div id="rigth">
+        <div class="element" *ngFor="let link of place.links">
+          <button (click)="click(link)">{{ render(link.rel) }}</button>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-template>
+
+</div>

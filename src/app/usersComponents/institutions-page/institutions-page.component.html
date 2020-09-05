@@ -1,0 +1,22 @@
+<div id="container">
+
+  <ng-container *ngIf="error; then showError; else answer"></ng-container>
+
+  <ng-template #showError>
+    {{ error }}
+  </ng-template>
+
+  <ng-template #answer>
+    <div class="element" *ngFor="let ins of institutionsList">
+      <h2 *ngFor="let link of ins.links">
+        <a [title]="link.rel" [routerLink]="modifyLink(link.href)">
+          {{ link.rel }}
+        </a>
+      </h2>
+      <h4 class="itemsDescription">
+        {{ ins.description }}
+      </h4>
+    </div>
+  </ng-template>
+
+</div>
