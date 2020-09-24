@@ -16,6 +16,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         headers: new HttpHeaders({
           Authorization: this.authService.createBasicAuth(),
         }),
+        withCredentials: true
       });
       return next.handle(authReq);
     } else {
