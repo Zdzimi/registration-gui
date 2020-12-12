@@ -26,6 +26,10 @@ export class HomePageComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    const loggedUsername = localStorage.getItem('username');
+    if (loggedUsername !== null) {
+      this.router.navigate(['/registration/' + loggedUsername]);
+    }
   }
 
   showLogin() {

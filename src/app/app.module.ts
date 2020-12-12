@@ -24,6 +24,7 @@ import { UsersPanelComponent } from './usersComponents/users-panel/users-panel.c
 import { UserPanelComponent } from './usersComponents/user-panel/user-panel.component';
 import { PlacePanelComponent } from './usersComponents/place-panel/place-panel.component';
 import { TemplatePanelComponent } from './usersComponents/template-panel/template-panel.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { TemplatePanelComponent } from './usersComponents/template-panel/templat
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true
-    }
+    },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })
